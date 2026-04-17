@@ -2,9 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import swaggerUi from 'swagger-ui-express'
-import { swaggerSpec } from './config/swagger'
+import { swaggerSpec } from './config/swagger.js'
 
-import { geoRouter } from './routes/geo.routes'
+import { geoRouter } from './routes/geo.routes.js'
 
 const app = express()
 const PORT = process.env.PORT ?? 3000

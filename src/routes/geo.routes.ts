@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getProvincias, getPartidos, getLocalidades } from '../controllers/geo.controller'
+import { getProvincias, getPartidos, getLocalidades } from '../controllers/geo.controller.js'
 
 export const geoRouter = Router()
 
