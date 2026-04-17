@@ -9,8 +9,14 @@ const options: swaggerJsdoc.Options = {
       description: 'API pública con indicadores de telecomunicaciones de Argentina. Datos provistos por ENACOM.',
     },
     servers: [
-      { url: 'http://localhost:3000/api/v1', description: 'Local' },
-      { url: 'https://enacom-api.onrender.com/api/v1', description: 'Producción' }
+      {
+        url: 'https://indicadores-api-fgcx.onrender.com/api/v1',
+        description: 'Producción'
+      },
+      {
+        url: 'http://localhost:3000/api/v1',
+        description: 'Local'
+      }
     ],
     tags: [
       { name: 'Geo', description: 'Provincias, partidos y localidades' },
