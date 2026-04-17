@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from './config/swagger.js'
 
 import { geoRouter } from './routes/geo.routes.js'
+import { telefoniaRouter } from './routes/telefonia.routes.js'
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
@@ -24,23 +25,29 @@ app.get('/', (_req, res) => {
     endpoints: {
       geo: '/api/v1/geo',
       internet: '/api/v1/internet',
-      comunicaciones_moviles: '/api/v1/comunicaciones_moviles',
-      telefonia_fija: '/api/v1/telefonia_fija',
+      comunicaciones_moviles: '/api/v1/comunicaciones-moviles',
+      telefonia_fija: '/api/v1/telefonia-fija',
       television: '/api/v1/television',
       portabilidad: '/api/v1/portabilidad',
-      mercado_postal: '/api/v1/mercado_postal',
+      mercado_postal: '/api/v1/mercado-postal',
     }
   })
 })
 
+app.use((req, _res, next) => {
+  console.log(`Request URL: ${req.url}`);
+  console.log(`Request Method: ${req.method}`);
+  next();
+});
+
 // Rutas
 app.use('/api/v1/geo',      geoRouter)
 // app.use('/api/v1/internet',      internetRouter)
-// app.use('/api/v1/comunicaciones_moviles',      comunicaciones_movilesRouter)
-// app.use('/api/v1/telefonia_fija',      telefonia_fijaRouter)
+// app.use('/api/v1/comunicaciones-moviles',      comunicaciones_movilesRouter)
+app.use('/api/v1/telefonia-fija',      telefoniaRouter)
 // app.use('/api/v1/television',      televisionRouter)
 // app.use('/api/v1/portabilidad',      portabilidadRouter)
-// app.use('/api/v1/mercado_postal',      mercado_postalRouter)
+// app.use('/api/v1/mercado-postal',      mercado_postalRouter)
 
 
 app.listen(PORT, () => {

@@ -33,6 +33,11 @@ API pública con indicadores de telecomunicaciones de Argentina, basada en datos
 ### Telefonía Fija
 | Método | Ruta | Query params |
 |--------|------|-------------|
+| GET | `/api/v1/telefonia-fija/accesos` | `anio`, `trimestre` |
+| GET | `/api/v1/telefonia-fija/accesos/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/telefonia-fija/ingresos` | `anio`, `trimestre` |
+| GET | `/api/v1/telefonia-fija/penetracion` | `anio`, `trimestre` |
+| GET | `/api/v1/telefonia-fija/penetracion/provincias` | `anio`, `trimestre`, `provincia` |
 
 
 ### TV
@@ -48,7 +53,7 @@ API pública con indicadores de telecomunicaciones de Argentina, basada en datos
 ## Instalación local
 
 ```bash
-git clone https://github.com/tu-usuario/indicadores-api
+git clone https://github.com/leoliveradev/indicadores-api
 cd indicadores-api
 npm install
 cp .env.example .env   
