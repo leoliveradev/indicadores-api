@@ -23,7 +23,17 @@ API pública con indicadores de telecomunicaciones de Argentina, basada en datos
 ### Comunicaciones Móviles
 | Método | Ruta | Query params |
 |--------|------|-------------|
+| GET | `/api/v1/comunicaciones-moviles/accesos` | `anio`, `trimestre` |
+| GET | `/api/v1/comunicaciones-moviles/ingresos` | `anio`, `trimestre` |
+| GET | `/api/v1/comunicaciones-moviles/llamadas` | `anio`, `trimestre` |
+| GET | `/api/v1/comunicaciones-moviles/minutos` | `anio`, `trimestre` |
+| GET | `/api/v1/comunicaciones-moviles/penetracion` | `anio`, `trimestre` |
+| GET | `/api/v1/comunicaciones-moviles/sms` | `anio`, `trimestre` |
 
+### Portabilidad
+| Método | Ruta | Query params |
+|--------|------|-------------|
+| GET | `/api/v1/portabilidad/moviles` | `anio`, `mes` |
 
 ### Internet
 | Método | Ruta | Query params |

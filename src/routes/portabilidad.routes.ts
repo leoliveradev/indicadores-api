@@ -9,7 +9,7 @@ export const portabilidadRouter = Router()
  * /portabilidad/moviles:
  *   get:
  *     summary: Portabilidad numérica móvil (mensual)
- *     tags: [Móviles]
+ *     tags: [Portabilidad]
  *     parameters:
  *       - in: query
  *         name: anio
