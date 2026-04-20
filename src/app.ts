@@ -11,6 +11,8 @@ import { portabilidadRouter } from './routes/portabilidad.routes.js'
 import { telefoniaFijaRouter } from './routes/fija.routes.js'
 import { televisionRouter } from './routes/tv.routes.js'
 import { mercadoPostalRouter } from './routes/postal.routes.js'
+import { errorHandler, notFound } from './middlewares/errorHandler.js'
+
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
@@ -54,6 +56,8 @@ app.use('/api/v1/telefonia-fija',      telefoniaFijaRouter)
 app.use('/api/v1/television',      televisionRouter)
 app.use('/api/v1/mercado-postal',      mercadoPostalRouter)
 
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(PORT, () => {
   console.log(`🚀 ENACOM INDICADORES API running on http://localhost:${PORT}`)
