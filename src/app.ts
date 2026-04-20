@@ -7,6 +7,7 @@ import { swaggerSpec } from './config/swagger.js'
 import { geoRouter } from './routes/geo.routes.js'
 import { telefoniaRouter } from './routes/telefonia.routes.js'
 import { televisionRouter } from './routes/tv.routes.js'
+import { mercadoPostalRouter } from './routes/postal.routes.js'
 
 const app = express()
 const PORT = process.env.PORT ?? 3000
@@ -45,6 +46,7 @@ app.use((req, _res, next) => {
 app.use('/api/v1/geo',      geoRouter)
 app.use('/api/v1/telefonia-fija',      telefoniaRouter)
 app.use('/api/v1/television',      televisionRouter)
+app.use('/api/v1/mercado-postal',      mercadoPostalRouter)
 
 
 app.listen(PORT, () => {

@@ -52,7 +52,10 @@ API pública con indicadores de telecomunicaciones de Argentina, basada en datos
 ### Mercado Postal
 | Método | Ruta | Query params |
 |--------|------|-------------|
-
+| GET | `/api/v1/mercado-postal/facturacion` | `anio`, `mes` |
+| GET | `/api/v1/mercado-postal/produccion` | `anio`, `mes` |
+| GET | `/api/v1/mercado-postal/personal-ocupado` | `anio`, `trimestre` |
+| GET | `/api/v1/mercado-postal/facturacion-produccion/provincias` | `anio`, `trimestre`, `provincia` |
 
 ## Instalación local
 
