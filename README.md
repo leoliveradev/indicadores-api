@@ -43,7 +43,11 @@ API pública con indicadores de telecomunicaciones de Argentina, basada en datos
 ### TV
 | Método | Ruta | Query params |
 |--------|------|-------------|
-
+| GET | `/api/v1/tv/accesos` | `anio`, `trimestre` |
+| GET | `/api/v1/tv/accesos/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/tv/ingresos` | `anio`, `trimestre` |
+| GET | `/api/v1/tv/penetracion` | `anio`, `trimestre` |
+| GET | `/api/v1/tv/penetracion/provincias` | `anio`, `trimestre`, `provincia` |
 
 ### Mercado Postal
 | Método | Ruta | Query params |
