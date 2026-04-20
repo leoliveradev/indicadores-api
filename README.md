@@ -38,7 +38,20 @@ API pública con indicadores de telecomunicaciones de Argentina, basada en datos
 ### Internet
 | Método | Ruta | Query params |
 |--------|------|-------------|
-
+| GET | `/api/v1/internet/accesos` | `anio`, `trimestre` |
+| GET | `/api/v1/internet/accesos/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/internet/penetracion` | `anio`, `trimestre` |
+| GET | `/api/v1/internet/penetracion/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/internet/tecnologias` | `anio`, `trimestre` |
+| GET | `/api/v1/internet/tecnologias/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/internet/tecnologias/localidades` | `provincia`, `localidad`, `tecnologia` |
+| GET | `/api/v1/internet/velocidad/rangos` | `anio`, `trimestre` |
+| GET | `/api/v1/internet/velocidad/rangos/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/internet/velocidad/media` | `anio`, `trimestre` |
+| GET | `/api/v1/internet/velocidad/media/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/internet/velocidad/provincias` | `anio`, `trimestre`, `provincia` |
+| GET | `/api/v1/internet/velocidad/localidades` | `provincia`, `localidad` |
+| GET | `/api/v1/internet/ingresos` | `anio`, `trimestre` |
 
 ### Telefonía Fija
 | Método | Ruta | Query params |

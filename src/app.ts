@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from './config/swagger.js'
 
 import { geoRouter } from './routes/geo.routes.js'
+import { internetRouter } from './routes/internet.routes.js'
 import { movilesRouter } from './routes/moviles.routes.js'
 import { portabilidadRouter } from './routes/portabilidad.routes.js'
 import { telefoniaFijaRouter } from './routes/fija.routes.js'
@@ -46,6 +47,7 @@ app.use((req, _res, next) => {
 
 // Rutas
 app.use('/api/v1/geo',      geoRouter)
+app.use('/api/v1/internet',      internetRouter)
 app.use('/api/v1/comunicaciones-moviles',      movilesRouter)
 app.use('/api/v1/portabilidad',      portabilidadRouter)
 app.use('/api/v1/telefonia-fija',      telefoniaFijaRouter)
