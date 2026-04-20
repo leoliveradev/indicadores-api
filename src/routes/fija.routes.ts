@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { getAccesos, getAccesosProvincias, getIngresos, getPenetracion, getPenetracionProvincias } from '../controllers/telefonia.controller.js'
+import { getAccesos, getAccesosProvincias, getIngresos, getPenetracion, getPenetracionProvincias } from '../controllers/fija.controller.js'
 
-export const telefoniaRouter = Router()
+export const telefoniaFijaRouter = Router()
 
 /**
  * @swagger
@@ -22,7 +22,7 @@ export const telefoniaRouter = Router()
  *       200:
  *         description: OK
  */
-telefoniaRouter.get('/accesos', getAccesos)
+telefoniaFijaRouter.get('/accesos', getAccesos)
 
 /**
  * @swagger
@@ -47,7 +47,7 @@ telefoniaRouter.get('/accesos', getAccesos)
  *       200:
  *         description: OK
  */
-telefoniaRouter.get('/accesos/provincias', getAccesosProvincias)
+telefoniaFijaRouter.get('/accesos/provincias', getAccesosProvincias)
 
 /**
  * @swagger
@@ -68,7 +68,7 @@ telefoniaRouter.get('/accesos/provincias', getAccesosProvincias)
  *       200:
  *         description: OK
  */
-telefoniaRouter.get('/ingresos', getIngresos)
+telefoniaFijaRouter.get('/ingresos', getIngresos)
 
 /**
  * @swagger
@@ -89,7 +89,7 @@ telefoniaRouter.get('/ingresos', getIngresos)
  *       200:
  *         description: OK
  */
-telefoniaRouter.get('/penetracion', getPenetracion)
+telefoniaFijaRouter.get('/penetracion', getPenetracion)
 
 /**
  * @swagger
@@ -114,4 +114,4 @@ telefoniaRouter.get('/penetracion', getPenetracion)
  *       200:
  *         description: OK
  */
-telefoniaRouter.get('/penetracion/provincias', getPenetracionProvincias)
+telefoniaFijaRouter.get('/penetracion/provincias', getPenetracionProvincias)

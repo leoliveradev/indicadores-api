@@ -7,7 +7,7 @@ import { swaggerSpec } from './config/swagger.js'
 import { geoRouter } from './routes/geo.routes.js'
 import { movilesRouter } from './routes/moviles.routes.js'
 import { portabilidadRouter } from './routes/portabilidad.routes.js'
-import { telefoniaRouter } from './routes/telefonia.routes.js'
+import { telefoniaFijaRouter } from './routes/fija.routes.js'
 import { televisionRouter } from './routes/tv.routes.js'
 import { mercadoPostalRouter } from './routes/postal.routes.js'
 
@@ -48,7 +48,7 @@ app.use((req, _res, next) => {
 app.use('/api/v1/geo',      geoRouter)
 app.use('/api/v1/comunicaciones-moviles',      movilesRouter)
 app.use('/api/v1/portabilidad',      portabilidadRouter)
-app.use('/api/v1/telefonia-fija',      telefoniaRouter)
+app.use('/api/v1/telefonia-fija',      telefoniaFijaRouter)
 app.use('/api/v1/television',      televisionRouter)
 app.use('/api/v1/mercado-postal',      mercadoPostalRouter)
 
