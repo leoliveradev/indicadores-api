@@ -90,4 +90,28 @@ telefoniaRouter.get('/ingresos', getIngresos)
  *         description: OK
  */
 telefoniaRouter.get('/penetracion', getPenetracion)
+
+/**
+ * @swagger
+ * /telefonia-fija/penetracion/provincias:
+ *   get:
+ *     summary: Penetración de telefonía fija (c/100 hab y c/100 hogares)
+ *     tags: [Telefonía Fija]
+ *     parameters:
+ *       - in: query
+ *         name: anio
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: trimestre
+ *         schema:
+ *           type: integer
+*       - in: query
+ *         name: provincia
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: OK
+ */
 telefoniaRouter.get('/penetracion/provincias', getPenetracionProvincias)
