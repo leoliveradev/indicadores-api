@@ -13,7 +13,7 @@ export const internetRouter = Router()
 
 /**
  * @swagger
- * /internet/accesos:
+ * /internet/accesos/baf:
  *   get:
  *     summary: Accesos de banda ancha fija y dial-up (nacional)
  *     tags: [Internet]
@@ -30,11 +30,11 @@ export const internetRouter = Router()
  *       200:
  *         description: OK
  */
-internetRouter.get('/accesos', getAccesosBaf)
+internetRouter.get('/accesos/baf', getAccesosBaf)
 
 /**
  * @swagger
- * /internet/accesos/provincias:
+ * /internet/accesos/baf/provincias:
  *   get:
  *     summary: Accesos de banda ancha fija por provincia
  *     tags: [Internet]
@@ -55,7 +55,7 @@ internetRouter.get('/accesos', getAccesosBaf)
  *       200:
  *         description: OK
  */
-internetRouter.get('/accesos/provincias', getAccesosBafProvincias)
+internetRouter.get('/accesos/baf/provincias', getAccesosBafProvincias)
 
 /**
  * @swagger
@@ -105,7 +105,7 @@ internetRouter.get('/penetracion/provincias', getPenetracionProvincias)
 
 /**
  * @swagger
- * /internet/tecnologias:
+ * /internet/accesos/tecnologias:
  *   get:
  *     summary: Accesos por tecnología (ADSL, cablemodem, fibra óptica, wireless)
  *     tags: [Internet]
@@ -122,11 +122,11 @@ internetRouter.get('/penetracion/provincias', getPenetracionProvincias)
  *       200:
  *         description: OK
  */
-internetRouter.get('/tecnologias', getTecnologias)
+internetRouter.get('/accesos/tecnologias', getTecnologias)
 
 /**
  * @swagger
- * /internet/tecnologias/provincias:
+ * /internet/accesos/tecnologias/provincias:
  *   get:
  *     summary: Accesos por tecnología a nivel provincial
  *     tags: [Internet]
@@ -147,11 +147,11 @@ internetRouter.get('/tecnologias', getTecnologias)
  *       200:
  *         description: OK
  */
-internetRouter.get('/tecnologias/provincias', getTecnologiasProvincias)
+internetRouter.get('/accesos/tecnologias/provincias', getTecnologiasProvincias)
 
 /**
  * @swagger
- * /internet/tecnologias/localidades:
+ * /internet/accesos/tecnologias/localidades:
  *   get:
  *     summary: Accesos por tecnología a nivel localidad
  *     tags: [Internet]
@@ -172,11 +172,11 @@ internetRouter.get('/tecnologias/provincias', getTecnologiasProvincias)
  *       200:
  *         description: OK
  */
-internetRouter.get('/tecnologias/localidades', getTecnologiasLocalidades)
+internetRouter.get('/accesos/tecnologias/localidades', getTecnologiasLocalidades)
 
 /**
  * @swagger
- * /internet/velocidad/rangos:
+ * /internet/accesos/rangos-velocidad:
  *   get:
  *     summary: Accesos por rango de velocidad (nacional)
  *     tags: [Internet]
@@ -193,11 +193,11 @@ internetRouter.get('/tecnologias/localidades', getTecnologiasLocalidades)
  *       200:
  *         description: OK
  */
-internetRouter.get('/velocidad/rangos', getRangosVelocidad)
+internetRouter.get('/accesos/rangos-velocidad', getRangosVelocidad)
 
 /**
  * @swagger
- * /internet/velocidad/rangos/provincias:
+ * /internet/accesos/rangos-velocidad/provincias:
  *   get:
  *     summary: Accesos por rango de velocidad (por provincia)
  *     tags: [Internet]
@@ -218,11 +218,11 @@ internetRouter.get('/velocidad/rangos', getRangosVelocidad)
  *       200:
  *         description: OK
  */
-internetRouter.get('/velocidad/rangos/provincias', getRangosVelocidadProvincias)
+internetRouter.get('/accesos/rangos-velocidad/provincias', getRangosVelocidadProvincias)
 
 /**
  * @swagger
- * /internet/velocidad/media:
+ * /internet/accesos/velocidad-media:
  *   get:
  *     summary: Velocidad media de descarga (Mbps, nacional)
  *     tags: [Internet]
@@ -239,11 +239,11 @@ internetRouter.get('/velocidad/rangos/provincias', getRangosVelocidadProvincias)
  *       200:
  *         description: OK
  */
-internetRouter.get('/velocidad/media', getVelocidadMedia)
+internetRouter.get('/accesos/velocidad-media', getVelocidadMedia)
 
 /**
  * @swagger
- * /internet/velocidad/media/provincias:
+ * /internet/accesos/velocidad-media/provincias:
  *   get:
  *     summary: Velocidad media de descarga (Mbps, por provincia)
  *     tags: [Internet]
@@ -264,11 +264,11 @@ internetRouter.get('/velocidad/media', getVelocidadMedia)
  *       200:
  *         description: OK
  */
-internetRouter.get('/velocidad/media/provincias', getVelocidadMediaProvincias)
+internetRouter.get('/accesos/velocidad-media/provincias', getVelocidadMediaProvincias)
 
 /**
  * @swagger
- * /internet/velocidad/provincias:
+ * /internet/accesos/velocidad/provincias:
  *   get:
  *     summary: Velocidades en Mbps a nivel provincial
  *     tags: [Internet]
@@ -289,11 +289,11 @@ internetRouter.get('/velocidad/media/provincias', getVelocidadMediaProvincias)
  *       200:
  *         description: OK
  */
-internetRouter.get('/velocidad/provincias', getVelocidadProvincias)
+internetRouter.get('/accesos/velocidad/provincias', getVelocidadProvincias)
 
 /**
  * @swagger
- * /internet/velocidad/localidades:
+ * /internet/accesos/velocidad/localidades:
  *   get:
  *     summary: Velocidades en Mbps a nivel localidad
  *     tags: [Internet]
@@ -314,7 +314,7 @@ internetRouter.get('/velocidad/provincias', getVelocidadProvincias)
  *       200:
  *         description: OK
  */
-internetRouter.get('/velocidad/localidades', getVelocidadLocalidades)
+internetRouter.get('/accesos/velocidad/localidades', getVelocidadLocalidades)
 
 /**
  * @swagger
