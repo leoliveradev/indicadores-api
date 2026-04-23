@@ -8,12 +8,16 @@ export const errorHandler = (
   err: HttpError,
   req: Request,
   res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  next: NextFunction
+  _next: NextFunction
 ): void => {
   console.error(err.stack)
   res.status(err.status ?? 500).json({
-    error: { message: err.message ?? 'Error interno del servidor', status: err.status ?? 500, path: req.originalUrl }
+    error: {
+      message: err.message ?? 'Error interno del servidor',
+      status: err.status ?? 500,
+      path: req.originalUrl,
+      ...(process.env.NODE_ENV !== 'production' && { stack: err.stack })
+    }
   })
 }
 
