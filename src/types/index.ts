@@ -1,8 +1,15 @@
 export type * from './database.js' 
 
-export type PeriodQueryParams = {
+export type BasePeriodParams = {
   anio?: string
+}
+
+export type PeriodQueryParams = BasePeriodParams & {
   trimestre?: string
+}
+
+export type PeriodMonthsQueryParams = BasePeriodParams & {
+  mes?: string
 }
 
 export type ProvinciaQueryParams = PeriodQueryParams & {

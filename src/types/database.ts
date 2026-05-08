@@ -723,7 +723,7 @@ export type Database = {
           },
         ]
       }
-      portabiliad_movil: {
+      portabilidad_movil: {
         Row: {
           anio: number
           mes: number
@@ -753,6 +753,93 @@ export type Database = {
         Update: {
           id?: number
           provincia?: string | null
+        }
+        Relationships: []
+      }
+      resumen_ejecutivo: {
+        Row: {
+          accesos_fija: number | null
+          accesos_internet: number | null
+          accesos_moviles: number | null
+          accesos_tv: number | null
+          anio: number | null
+          created_at: string
+          id: number
+          ingresos_fija: number | null
+          ingresos_internet: number | null
+          ingresos_moviles: number | null
+          ingresos_tv: number | null
+          mes: number | null
+          miscelaneas_fibra_optica: number | null
+          miscelaneas_radiobases_4g: number | null
+          miscelaneas_satelital_crecimiento: number | null
+          miscelaneas_vmd: number | null
+          penetracion_fija_100_hog: number | null
+          penetracion_internet_100_hog: number | null
+          penetracion_moviles_100_hab: number | null
+          penetracion_tv_100_hog: number | null
+          portabilidad_fija_acum: number | null
+          portabilidad_fija_mes: number | null
+          portabilidad_moviles_acum: number | null
+          portabilidad_moviles_mes: number | null
+          postal_facturacion: number | null
+          postal_produccion: number | null
+        }
+        Insert: {
+          accesos_fija?: number | null
+          accesos_internet?: number | null
+          accesos_moviles?: number | null
+          accesos_tv?: number | null
+          anio?: number | null
+          created_at?: string
+          id?: number
+          ingresos_fija?: number | null
+          ingresos_internet?: number | null
+          ingresos_moviles?: number | null
+          ingresos_tv?: number | null
+          mes?: number | null
+          miscelaneas_fibra_optica?: number | null
+          miscelaneas_radiobases_4g?: number | null
+          miscelaneas_satelital_crecimiento?: number | null
+          miscelaneas_vmd?: number | null
+          penetracion_fija_100_hog?: number | null
+          penetracion_internet_100_hog?: number | null
+          penetracion_moviles_100_hab?: number | null
+          penetracion_tv_100_hog?: number | null
+          portabilidad_fija_acum?: number | null
+          portabilidad_fija_mes?: number | null
+          portabilidad_moviles_acum?: number | null
+          portabilidad_moviles_mes?: number | null
+          postal_facturacion?: number | null
+          postal_produccion?: number | null
+        }
+        Update: {
+          accesos_fija?: number | null
+          accesos_internet?: number | null
+          accesos_moviles?: number | null
+          accesos_tv?: number | null
+          anio?: number | null
+          created_at?: string
+          id?: number
+          ingresos_fija?: number | null
+          ingresos_internet?: number | null
+          ingresos_moviles?: number | null
+          ingresos_tv?: number | null
+          mes?: number | null
+          miscelaneas_fibra_optica?: number | null
+          miscelaneas_radiobases_4g?: number | null
+          miscelaneas_satelital_crecimiento?: number | null
+          miscelaneas_vmd?: number | null
+          penetracion_fija_100_hog?: number | null
+          penetracion_internet_100_hog?: number | null
+          penetracion_moviles_100_hab?: number | null
+          penetracion_tv_100_hog?: number | null
+          portabilidad_fija_acum?: number | null
+          portabilidad_fija_mes?: number | null
+          portabilidad_moviles_acum?: number | null
+          portabilidad_moviles_mes?: number | null
+          postal_facturacion?: number | null
+          postal_produccion?: number | null
         }
         Relationships: []
       }

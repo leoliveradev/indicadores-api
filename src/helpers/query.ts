@@ -12,30 +12,6 @@ interface ProvinciaFilters extends PeriodFilters {
   provincia?: string
 }
 
-interface MesFilters {
-  anio?: string
-  mes?: string
-}
-
-// Consulta genérica con filtros de período (anio/trimestre)
-export const queryWithPeriod = async (
-  table: TableName,
-  filters: PeriodFilters,
-  orderBy: string[] = ['anio', 'trimestre']
-) => {
-  let query = supabase.from(table).select('*') as any
-
-  if (filters.anio) query = query.eq('anio', Number(filters.anio))
-  if (filters.trimestre) query = query.eq('trimestre', Number(filters.trimestre))
-
-  for (const col of orderBy) {
-    query = query.order(col)
-  }
-
-  return query
-}
-
-// Consulta genérica con filtros de período + provincia
 export const queryWithProvincia = async (
   table: TableName,
   filters: ProvinciaFilters,
@@ -54,20 +30,37 @@ export const queryWithProvincia = async (
   return query
 }
 
-// Consulta genérica con filtros de año/mes (mercado postal)
-export const queryWithMes = async (
+export const queryWithFilters = async (
   table: TableName,
-  filters: MesFilters,
-  orderBy: string[] = ['anio', 'mes']
+  filters: Partial<Record<string, string>>,
+  orderBy: string[]
 ) => {
   let query = supabase.from(table).select('*') as any
 
-  if (filters.anio) query = query.eq('anio', Number(filters.anio))
-  if (filters.mes) query = query.eq('mes', Number(filters.mes))
+  for (const key in filters) {
+    if (filters[key]) {
+      query = query.eq(key, Number(filters[key]))
+    }
+  }
 
   for (const col of orderBy) {
     query = query.order(col)
   }
+
+  return query
+}
+
+export const queryLatest = async (
+  table: TableName,
+  orderBy: string[] = ['anio', 'mes']
+) => {
+  let query = supabase.from(table).select('*') as any
+
+  for (const col of orderBy) {
+    query = query.order(col, { ascending: false })
+  }
+
+  query = query.limit(1)
 
   return query
 }
