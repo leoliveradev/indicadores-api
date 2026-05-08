@@ -1,38 +1,20 @@
 import type { Request, Response, NextFunction } from 'express'
-import { queryWithPeriod, queryWithProvincia } from '../helpers/query.js'
-import type { PeriodQueryParams, ProvinciaQueryParams } from '../types/index.js'
 
-// Helper para endpoints nacionales
-const nacional = (table: Parameters<typeof queryWithPeriod>[0]) =>
-  async (req: Request<{}, {}, {}, PeriodQueryParams>, res: Response, next: NextFunction): Promise<void> => {
-    try {
-      const { data, error } = await queryWithPeriod(table, req.query)
-      if (error) throw error
-      res.json({ data, total: data.length })
-    } catch (err) { next(err) }
-  }
+import { createController } from './factories/controller.factory.js'
+import { withQuarter, withProvince } from './adapters/query.adapters.js'
 
-// Helper para endpoints por provincia
-const porProvincia = (table: Parameters<typeof queryWithProvincia>[0]) =>
-  async (req: Request<{}, {}, {}, ProvinciaQueryParams>, res: Response, next: NextFunction): Promise<void> => {
-    try {
-      const { data, error } = await queryWithProvincia(table, req.query)
-      if (error) throw error
-      res.json({ data, total: data.length })
-    } catch (err) { next(err) }
-  }
 
 // BAF (banda ancha fija)
-export const getAccesosBaf            = nacional('internet_accesos_baf')
-export const getAccesosBafProvincias  = porProvincia('internet_accesos_baf_provincias')
+export const getAccesosBaf = createController('internet_accesos_baf', withQuarter)
+export const getAccesosBafProvincias = createController('internet_accesos_baf_provincias',withProvince)
 
 // Penetración
-export const getPenetracion           = nacional('internet_accesos_penetracion')
-export const getPenetracionProvincias = porProvincia('internet_accesos_penetracion_provincias')
+export const getPenetracion = createController('internet_accesos_penetracion', withQuarter)
+export const getPenetracionProvincias = createController('internet_accesos_penetracion_provincias', withProvince)
 
 // Tecnologías
-export const getTecnologias           = nacional('internet_accesos_tecnologias')
-export const getTecnologiasProvincias = porProvincia('internet_accesos_tecnologias_provincias')
+export const getTecnologias = createController('internet_accesos_tecnologias', withQuarter)
+export const getTecnologiasProvincias = createController('internet_accesos_tecnologias_provincias', withProvince)
 
 // Tecnologías por localidad — filtro por provincia/localidad
 export const getTecnologiasLocalidades = async (
@@ -55,15 +37,15 @@ export const getTecnologiasLocalidades = async (
 }
 
 // Rangos de velocidad
-export const getRangosVelocidad           = nacional('internet_accesos_rangos_velocidad')
-export const getRangosVelocidadProvincias = porProvincia('internet_accesos_rangos_velocidad_provincias')
+export const getRangosVelocidad = createController('internet_accesos_rangos_velocidad', withQuarter)
+export const getRangosVelocidadProvincias = createController('internet_accesos_rangos_velocidad_provincias', withProvince)
 
 // Velocidad media de descarga
-export const getVelocidadMedia           = nacional('internet_velocidad_media_descarga')
-export const getVelocidadMediaProvincias = porProvincia('internet_velocidad_media_descarga_provincias')
+export const getVelocidadMedia = createController('internet_velocidad_media_descarga', withQuarter)
+export const getVelocidadMediaProvincias = createController('internet_velocidad_media_descarga_provincias', withProvince)
 
 // Velocidad por provincia y localidad
-export const getVelocidadProvincias = porProvincia('internet_accesos_velocidad_provincias')
+export const getVelocidadProvincias = createController('internet_accesos_velocidad_provincias', withProvince)
 
 export const getVelocidadLocalidades = async (
   req: Request<{}, {}, {}, { provincia?: string; localidad?: string }>,
@@ -84,4 +66,4 @@ export const getVelocidadLocalidades = async (
 }
 
 // Ingresos
-export const getIngresos = nacional('internet_ingresos')
+export const getIngresos = createController('internet_ingresos', withQuarter)
