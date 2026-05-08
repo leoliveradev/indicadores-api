@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from './config/swagger.js'
 
 import { geoRouter } from './routes/geo.routes.js'
+import { overviewRouter } from './routes/overview.routes.js'
 import { internetRouter } from './routes/internet.routes.js'
 import { movilesRouter } from './routes/moviles.routes.js'
 import { portabilidadRouter } from './routes/portabilidad.routes.js'
@@ -31,6 +32,7 @@ app.get('/', (_req, res) => {
     docs: '/api-docs',
     endpoints: {
       geo: '/api/v1/geo',
+      overview: '/api/v1/overview',
       internet: '/api/v1/internet',
       comunicaciones_moviles: '/api/v1/comunicaciones-moviles',
       telefonia_fija: '/api/v1/telefonia-fija',
@@ -41,20 +43,15 @@ app.get('/', (_req, res) => {
   })
 })
 
-app.use((req, _res, next) => {
-  console.log(`Request URL: ${req.url}`);
-  console.log(`Request Method: ${req.method}`);
-  next();
-});
-
 // Rutas
-app.use('/api/v1/geo',      geoRouter)
-app.use('/api/v1/internet',      internetRouter)
-app.use('/api/v1/comunicaciones-moviles',      movilesRouter)
-app.use('/api/v1/portabilidad',      portabilidadRouter)
-app.use('/api/v1/telefonia-fija',      telefoniaFijaRouter)
-app.use('/api/v1/television',      televisionRouter)
-app.use('/api/v1/mercado-postal',      mercadoPostalRouter)
+app.use('/api/v1/geo', geoRouter)
+app.use('/api/v1/overview', overviewRouter)
+app.use('/api/v1/internet', internetRouter)
+app.use('/api/v1/comunicaciones-moviles', movilesRouter)
+app.use('/api/v1/portabilidad', portabilidadRouter)
+app.use('/api/v1/telefonia-fija', telefoniaFijaRouter)
+app.use('/api/v1/television', televisionRouter)
+app.use('/api/v1/mercado-postal', mercadoPostalRouter)
 
 app.use(notFound)
 app.use(errorHandler)
