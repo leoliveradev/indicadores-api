@@ -3,48 +3,65 @@ import type { Database } from '../types/database.js'
 
 type TableName = keyof Database['public']['Tables']
 
-interface PeriodFilters {
-  anio?: string
-  trimestre?: string
-}
+// interface PeriodFilters {
+//   anio?: string
+//   trimestre?: string
+// }
 
-interface ProvinciaFilters extends PeriodFilters {
-  provincia?: string
-}
+// interface ProvinciaFilters extends PeriodFilters {
+//   provincia?: string
+// }
 
-export const queryWithProvincia = async (
-  table: TableName,
-  filters: ProvinciaFilters,
-  orderBy: string[] = ['anio', 'trimestre']
-) => {
-  let query = supabase.from(table).select('*') as any
+// export const queryWithProvincia = async (
+//   table: TableName,
+//   filters: ProvinciaFilters,
+//   orderBy: string[] = ['anio', 'trimestre']
+// ) => {
+//   let query = supabase.from(table).select('*') as any
 
-  if (filters.anio) query = query.eq('anio', Number(filters.anio))
-  if (filters.trimestre) query = query.eq('trimestre', Number(filters.trimestre))
-  if (filters.provincia) query = query.ilike('provincia', `%${filters.provincia}%`)
+//   if (filters.anio) query = query.eq('anio', Number(filters.anio))
+//   if (filters.trimestre) query = query.eq('trimestre', Number(filters.trimestre))
+//   if (filters.provincia) query = query.ilike('provincia', `%${filters.provincia}%`)
 
-  for (const col of orderBy) {
-    query = query.order(col)
-  }
+//   for (const col of orderBy) {
+//     query = query.order(col)
+//   }
 
-  return query
-}
+//   return query
+// }
 
 export const queryWithFilters = async (
   table: TableName,
-  filters: Partial<Record<string, string>>,
-  orderBy: string[]
+  filters: Record<string, any>,
+  orderBy: string[],
+  options?: { count?: boolean }
 ) => {
-  let query = supabase.from(table).select('*') as any
+  let query = supabase
+    .from(table)
+    .select('*', options?.count ? { count: 'exact' } : undefined) as any
+
+  const ignoredKeys = new Set(['from', 'to', 'page', 'limit'])
 
   for (const key in filters) {
-    if (filters[key]) {
-      query = query.eq(key, Number(filters[key]))
+    const value = filters[key]
+    if (!value) continue
+
+    if (ignoredKeys.has(key)) continue
+
+    if (key === 'provincia') {
+      query = query.ilike(key, `%${value}%`)
+    } else {
+      const parsed = isNaN(Number(value)) ? value : Number(value)
+      query = query.eq(key, parsed)
     }
   }
 
   for (const col of orderBy) {
     query = query.order(col)
+  }
+
+  if (typeof filters.from === 'number' && typeof filters.to === 'number') {
+    query = query.range(filters.from, filters.to)
   }
 
   return query

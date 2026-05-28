@@ -6,15 +6,28 @@ import { withQuarter, withProvince } from './adapters/query.adapters.js'
 
 // BAF (banda ancha fija)
 export const getAccesosBaf = createController('internet_accesos_baf', withQuarter)
-export const getAccesosBafProvincias = createController('internet_accesos_baf_provincias',withProvince)
+export const getAccesosBafProvincias = createController(
+  'internet_accesos_baf_provincias',
+  withProvince,
+  { pagination: true }
+)
 
 // Penetración
 export const getPenetracion = createController('internet_accesos_penetracion', withQuarter)
-export const getPenetracionProvincias = createController('internet_accesos_penetracion_provincias', withProvince)
+export const getPenetracionProvincias = createController(
+  'internet_accesos_penetracion_provincias',
+  withProvince,
+  { pagination: true }
+)
 
 // Tecnologías
 export const getTecnologias = createController('internet_accesos_tecnologias', withQuarter)
-export const getTecnologiasProvincias = createController('internet_accesos_tecnologias_provincias', withProvince)
+export const getTecnologiasProvincias = createController(
+  'internet_accesos_tecnologias_provincias',
+  withProvince,
+  { pagination: true }
+)
+
 
 // Tecnologías por localidad — filtro por provincia/localidad
 export const getTecnologiasLocalidades = async (
@@ -38,14 +51,26 @@ export const getTecnologiasLocalidades = async (
 
 // Rangos de velocidad
 export const getRangosVelocidad = createController('internet_accesos_rangos_velocidad', withQuarter)
-export const getRangosVelocidadProvincias = createController('internet_accesos_rangos_velocidad_provincias', withProvince)
+export const getRangosVelocidadProvincias = createController(
+  'internet_accesos_rangos_velocidad_provincias', 
+  withProvince,
+  { pagination: true }
+)
 
 // Velocidad media de descarga
 export const getVelocidadMedia = createController('internet_velocidad_media_descarga', withQuarter)
-export const getVelocidadMediaProvincias = createController('internet_velocidad_media_descarga_provincias', withProvince)
+export const getVelocidadMediaProvincias = createController(
+  'internet_velocidad_media_descarga_provincias', 
+  withProvince,
+  { pagination: true }
+)
 
 // Velocidad por provincia y localidad
-export const getVelocidadProvincias = createController('internet_accesos_velocidad_provincias', withProvince)
+export const getVelocidadProvincias = createController(
+  'internet_accesos_velocidad_provincias', 
+  withProvince,
+  { pagination: true }
+)
 
 export const getVelocidadLocalidades = async (
   req: Request<{}, {}, {}, { provincia?: string; localidad?: string }>,
