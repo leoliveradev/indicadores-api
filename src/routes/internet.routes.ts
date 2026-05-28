@@ -51,6 +51,18 @@ internetRouter.get('/accesos/baf', getAccesosBaf)
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK
@@ -97,6 +109,18 @@ internetRouter.get('/penetracion', getPenetracion)
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK
@@ -143,6 +167,18 @@ internetRouter.get('/accesos/tecnologias', getTecnologias)
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK
@@ -214,6 +250,18 @@ internetRouter.get('/accesos/rangos-velocidad', getRangosVelocidad)
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK
@@ -260,6 +308,18 @@ internetRouter.get('/accesos/velocidad-media', getVelocidadMedia)
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK
@@ -285,6 +345,18 @@ internetRouter.get('/accesos/velocidad-media/provincias', getVelocidadMediaProvi
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK

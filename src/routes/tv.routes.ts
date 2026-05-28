@@ -43,6 +43,18 @@ televisionRouter.get('/accesos', getAccesos)
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK
@@ -110,6 +122,18 @@ televisionRouter.get('/penetracion', getPenetracion)
  *         name: provincia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *     responses:
  *       200:
  *         description: OK
