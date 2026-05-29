@@ -1,9 +1,12 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { Database } from '../../types/database.js'
 import { exportToCSV, exportToExcel } from '../../utils/export.js'
+import { cache, generateCacheKey } from '../../utils/cache.js'
 
 interface ControllerOptions {
   pagination?: boolean
+  cache?: boolean
+  ttl?: number
 }
 
 export const createController = <
@@ -25,6 +28,17 @@ export const createController = <
   ): Promise<void> => {
     try {
       const format = req.query.format
+
+      const cacheKey = generateCacheKey(String(table), req.query)
+
+      if (options.cache && !format) {
+        const cached = cache.get(cacheKey)
+
+        if (cached) {
+          res.json(cached)
+          return
+        }
+      }
 
       const hasPaginationParams =
         req.query.page !== undefined || req.query.limit !== undefined
@@ -61,7 +75,7 @@ export const createController = <
       if (format) {
         paginationParams = {}
       }
-      
+
       if (!usePagination && data.length > 5000) {
         res.status(400).json({
           error: 'Too many records, use pagination or export'
@@ -93,21 +107,37 @@ export const createController = <
         return
       }
 
-      if (usePagination) {
-        res.json({
+      // if (usePagination) {
+      //   res.json({
+      //     data,
+      //     total: count,
+      //     page,
+      //     limit
+      //   })
+      //   return
+      // }
+
+      // res.json({
+      //   data,
+      //   total: data.length
+      // })
+      const response = usePagination
+        ? {
           data,
           total: count,
           page,
           limit
-        })
-        return
+        }
+        : {
+          data,
+          total: data.length
+        }
+
+      if (options.cache && !format) {
+        cache.set(cacheKey, response, options.ttl || 60)
       }
 
-      res.json({
-        data,
-        total: data.length
-      })
-
+      res.json(response)
 
     } catch (err) {
       next(err)
