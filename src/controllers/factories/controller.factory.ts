@@ -24,15 +24,20 @@ export const createController = <
     next: NextFunction
   ): Promise<void> => {
     try {
+      const format = req.query.format
+
       const hasPaginationParams =
         req.query.page !== undefined || req.query.limit !== undefined
+
+      const usePagination =
+        options.pagination && hasPaginationParams && !format
 
       let paginationParams: { from?: number; to?: number } = {}
 
       let page: number | undefined
       let limit: number | undefined
 
-      if (options.pagination && hasPaginationParams) {
+      if (usePagination) {
         page = Number(req.query.page || 1)
         limit = Number(req.query.limit || 100)
 
@@ -41,22 +46,27 @@ export const createController = <
 
         paginationParams = { from, to }
       }
-      
+
       const { data, error, count } = await queryFn(
         table,
         {
           ...req.query,
           ...paginationParams
         },
-        options.pagination ? { count: true } : undefined
+        usePagination ? { count: true } : undefined
       )
 
       if (error) throw error
 
-      const format = req.query.format
-
       if (format) {
         paginationParams = {}
+      }
+      
+      if (!usePagination && data.length > 5000) {
+        res.status(400).json({
+          error: 'Too many records, use pagination or export'
+        })
+        return
       }
 
       if (format === 'csv') {
@@ -83,20 +93,21 @@ export const createController = <
         return
       }
 
-      if (options.pagination && hasPaginationParams) {
+      if (usePagination) {
         res.json({
           data,
           total: count,
-          page: Number(req.query.page || 1),
-          limit: Number(req.query.limit || 100)
-        })
-      } else {
-        res.json({
-          data,
-          total: data.length
+          page,
+          limit
         })
         return
       }
+
+      res.json({
+        data,
+        total: data.length
+      })
+
 
     } catch (err) {
       next(err)
