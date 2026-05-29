@@ -13,7 +13,7 @@ export const queryWithFilters = async (
     .from(table)
     .select('*', options?.count ? { count: 'exact' } : undefined) as any
 
-  const ignoredKeys = new Set(['from', 'to', 'page', 'limit'])
+  const ignoredKeys = new Set(['from', 'to', 'page', 'limit', 'format', 'sort', 'order'])
 
   for (const key in filters) {
     const value = filters[key]
