@@ -18,6 +18,12 @@ export const mercadoPostalRouter = Router()
  *         name: mes
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -39,6 +45,12 @@ mercadoPostalRouter.get('/facturacion', getFacturacion)
  *         name: mes
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -60,6 +72,12 @@ mercadoPostalRouter.get('/produccion', getProduccion)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -97,6 +115,12 @@ mercadoPostalRouter.get('/personal-ocupado', getPersonalOcupado)
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK

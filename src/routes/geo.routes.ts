@@ -9,6 +9,13 @@ export const geoRouter = Router()
  *   get:
  *     summary: Listado de provincias de Argentina
  *     tags: [Geo]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: Lista de provincias
@@ -26,6 +33,12 @@ geoRouter.get('/provincias', getProvincias)
  *         name: provincia_id
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: Lista de partidos
@@ -43,6 +56,12 @@ geoRouter.get('/partidos', getPartidos)
  *         name: partido_id
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: Lista de localidades

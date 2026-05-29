@@ -26,6 +26,12 @@ export const internetRouter = Router()
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -63,6 +69,12 @@ internetRouter.get('/accesos/baf', getAccesosBaf)
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -84,6 +96,12 @@ internetRouter.get('/accesos/baf/provincias', getAccesosBafProvincias)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -121,6 +139,12 @@ internetRouter.get('/penetracion', getPenetracion)
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -142,6 +166,12 @@ internetRouter.get('/penetracion/provincias', getPenetracionProvincias)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -179,6 +209,12 @@ internetRouter.get('/accesos/tecnologias', getTecnologias)
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -204,6 +240,12 @@ internetRouter.get('/accesos/tecnologias/provincias', getTecnologiasProvincias)
  *         name: tecnologia
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -225,6 +267,12 @@ internetRouter.get('/accesos/tecnologias/localidades', getTecnologiasLocalidades
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -262,6 +310,12 @@ internetRouter.get('/accesos/rangos-velocidad', getRangosVelocidad)
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -283,6 +337,12 @@ internetRouter.get('/accesos/rangos-velocidad/provincias', getRangosVelocidadPro
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -309,17 +369,23 @@ internetRouter.get('/accesos/velocidad-media', getVelocidadMedia)
  *         schema:
  *           type: string
  *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
+ *       - in: query
  *         name: page
  *         schema:
  *           type: integer
  *           example: 1
  *         description: Número de página (opcional)
  *       - in: query
- *         name: limit
+ *         name: format
  *         schema:
- *           type: integer
- *           example: 100
- *         description: Cantidad de registros por página (opcional)
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -357,6 +423,12 @@ internetRouter.get('/accesos/velocidad-media/provincias', getVelocidadMediaProvi
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -382,6 +454,12 @@ internetRouter.get('/accesos/velocidad/provincias', getVelocidadProvincias)
  *         name: localidad
  *         schema:
  *           type: string
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -403,6 +481,12 @@ internetRouter.get('/accesos/velocidad/localidades', getVelocidadLocalidades)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK

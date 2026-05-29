@@ -18,6 +18,12 @@ export const overviewRouter = Router()
  *         name: mes
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -30,6 +36,13 @@ overviewRouter.get('/', getOverview)
  *   get:
  *     summary: Último período disponible
  *     tags: [Overview]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK

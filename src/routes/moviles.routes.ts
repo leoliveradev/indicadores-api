@@ -23,6 +23,12 @@ export const movilesRouter = Router()
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -44,6 +50,12 @@ movilesRouter.get('/accesos', getAccesos)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -65,6 +77,12 @@ movilesRouter.get('/ingresos', getIngresos)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -86,6 +104,12 @@ movilesRouter.get('/llamadas', getLlamadas)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -107,6 +131,12 @@ movilesRouter.get('/minutos', getMinutos)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -128,6 +158,12 @@ movilesRouter.get('/penetracion', getPenetracion)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK

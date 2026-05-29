@@ -55,6 +55,12 @@ telefoniaFijaRouter.get('/accesos', getAccesos)
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -76,6 +82,12 @@ telefoniaFijaRouter.get('/accesos/provincias', getAccesosProvincias)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -97,6 +109,12 @@ telefoniaFijaRouter.get('/ingresos', getIngresos)
  *         name: trimestre
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
@@ -134,6 +152,12 @@ telefoniaFijaRouter.get('/penetracion', getPenetracion)
  *           type: integer
  *           example: 100
  *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
  *     responses:
  *       200:
  *         description: OK
