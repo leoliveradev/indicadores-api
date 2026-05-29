@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express'
 import type { Database } from '../../types/database.js'
+import { exportToCSV, exportToExcel } from '../../utils/export.js'
 
 interface ControllerOptions {
   pagination?: boolean
@@ -18,23 +19,29 @@ export const createController = <
   options: ControllerOptions = {}
 ) => {
   return async (
-    req: Request<{}, {}, {}, TQuery & { page?: string; limit?: string }>,
+    req: Request<{}, {}, {}, TQuery & { page?: string; limit?: string; format?: string }>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
     try {
+      const hasPaginationParams =
+        req.query.page !== undefined || req.query.limit !== undefined
+
       let paginationParams: { from?: number; to?: number } = {}
 
-      if (options.pagination) {
-        const page = Number(req.query.page || 1)
-        const limit = Number(req.query.limit || 100)
+      let page: number | undefined
+      let limit: number | undefined
+
+      if (options.pagination && hasPaginationParams) {
+        page = Number(req.query.page || 1)
+        limit = Number(req.query.limit || 100)
 
         const from = (page - 1) * limit
         const to = from + limit - 1
 
         paginationParams = { from, to }
       }
-
+      
       const { data, error, count } = await queryFn(
         table,
         {
@@ -46,7 +53,37 @@ export const createController = <
 
       if (error) throw error
 
-      if (options.pagination) {
+      const format = req.query.format
+
+      if (format) {
+        paginationParams = {}
+      }
+
+      if (format === 'csv') {
+        const csv = exportToCSV(data)
+
+        res.header('Content-Type', 'text/csv')
+        res.attachment(`${String(table)}.csv`)
+
+        res.send(csv)
+        return
+      }
+
+      if (format === 'excel') {
+        const buffer = exportToExcel(data)
+
+        res.header(
+          'Content-Type',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+
+        res.attachment(`${String(table)}.xlsx`)
+
+        res.send(buffer)
+        return
+      }
+
+      if (options.pagination && hasPaginationParams) {
         res.json({
           data,
           total: count,
@@ -58,6 +95,7 @@ export const createController = <
           data,
           total: data.length
         })
+        return
       }
 
     } catch (err) {
