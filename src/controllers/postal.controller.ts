@@ -9,8 +9,13 @@ export const getProduccion = createController('mercado_postal_produccion', withM
 
 export const getPersonalOcupado = createController('mercado_postal_personal_ocupado', withQuarter)
 
-export const getFacturacionProduccionProvincias = createController(
-  'mercado_postal_facturacion_produccion_provincias', 
-  withProvince,
-  { pagination: true }
-)
+export const getFacturacionProduccionProvincias =
+  createController(
+    'mercado_postal_facturacion_produccion_provincias',
+    withProvince,
+    {
+      pagination: true,
+      cache: true,
+      ttl: 60
+    }
+  )

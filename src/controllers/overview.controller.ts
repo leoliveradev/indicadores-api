@@ -6,7 +6,6 @@ import { transformOverview } from '../transformers/overview.transformers.js'
 
 export const getOverview = createController('resumen_ejecutivo', withMonth)
 
-
 export const getOverviewLatest = async (
   _req: Request,
   res: Response,
@@ -25,19 +24,3 @@ export const getOverviewLatest = async (
     next(err)
   }
 }
-// export const getOverviewLatest = async (
-//   _req: Request,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   try {
-//     const { data, error } = await queryLatest('resumen_ejecutivo')
-
-//     if (error) throw error
-
-//     res.json(data?.[0] || null)
-
-//   } catch (err) {
-//     next(err)
-//   }
-// }
