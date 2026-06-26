@@ -20,10 +20,13 @@ export const latestByPeriod = async (
 
   if (!latestData) return { data: [], error: null }
 
+  // ✅ FIX CLAVE
+  const row = latestData as Record<string, any>
+
   let query = supabase.from(table).select('*')
 
   for (const col of periodCols) {
-    query = query.eq(col, latestData[col])
+    query = query.eq(col, row[col])
   }
 
   return query
