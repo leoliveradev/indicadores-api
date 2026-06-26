@@ -1,4 +1,5 @@
 import { supabase } from '../config/supabase.js'
+import { latestByPeriod } from '../controllers/adapters/latest.adapters.js'
 import type { Database } from '../types/database.js'
 
 type TableName = keyof Database['public']['Tables']
@@ -54,3 +55,9 @@ export const queryLatest = async (
 
   return query
 }
+
+export const latestByMonth = (table: TableName) =>
+  latestByPeriod(table, ['anio', 'mes'])
+
+export const latestByQuarter = (table: TableName) =>
+  latestByPeriod(table, ['anio', 'trimestre'])
