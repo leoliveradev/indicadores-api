@@ -107,20 +107,6 @@ export const createController = <
         return
       }
 
-      // if (usePagination) {
-      //   res.json({
-      //     data,
-      //     total: count,
-      //     page,
-      //     limit
-      //   })
-      //   return
-      // }
-
-      // res.json({
-      //   data,
-      //   total: data.length
-      // })
       const response = usePagination
         ? {
           data,
