@@ -6,7 +6,8 @@ import {
   getRangosVelocidad, getRangosVelocidadProvincias,
   getVelocidadMedia, getVelocidadMediaProvincias,
   getVelocidadProvincias, getVelocidadLocalidades,
-  getIngresos
+  getIngresos,
+  getTecnologiasProvinciasLatest
 } from '../controllers/internet.controller.js'
 
 export const internetRouter = Router()
@@ -220,6 +221,25 @@ internetRouter.get('/accesos/tecnologias', getTecnologias)
  *         description: OK
  */
 internetRouter.get('/accesos/tecnologias/provincias', getTecnologiasProvincias)
+
+/**
+ * @swagger
+ * /internet/accesos/tecnologias/provincias/latest:
+ *   get:
+ *     summary: Accesos por tecnología a nivel provincial (último período disponible)
+ *     tags: [Internet]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+internetRouter.get('/accesos/tecnologias/provincias/latest', getTecnologiasProvinciasLatest)
 
 /**
  * @swagger

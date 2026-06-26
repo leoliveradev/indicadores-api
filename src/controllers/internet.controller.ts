@@ -1,7 +1,8 @@
 import type { Request, Response, NextFunction } from 'express'
 
-import { createController } from './factories/controller.factory.js'
+import { createController, createLatestController } from './factories/controller.factory.js'
 import { withQuarter, withProvince } from './adapters/query.adapters.js'
+import { latestByQuarter } from '../helpers/query.js'
 
 
 // BAF (banda ancha fija)
@@ -32,6 +33,7 @@ export const getPenetracionProvincias =
 
 // Tecnologías
 export const getTecnologias = createController('internet_accesos_tecnologias', withQuarter)
+
 export const getTecnologiasProvincias =
   createController(
     'internet_accesos_tecnologias_provincias',
@@ -42,7 +44,12 @@ export const getTecnologiasProvincias =
       ttl: 60
     }
   )
-
+export const getTecnologiasProvinciasLatest =
+  createLatestController(
+    'internet_accesos_tecnologias_provincias',
+    latestByQuarter,
+    { cache: true, ttl: 60 }
+  )
 
 // Tecnologías por localidad — filtro por provincia/localidad
 export const getTecnologiasLocalidades = async (
