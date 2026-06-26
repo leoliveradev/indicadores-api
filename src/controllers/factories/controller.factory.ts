@@ -72,9 +72,9 @@ export const createController = <
 
       if (error) throw error
 
-      if (format) {
-        paginationParams = {}
-      }
+      // if (format) {
+      //   paginationParams = {}
+      // }
 
       if (!usePagination && data.length > 5000) {
         res.status(400).json({
@@ -118,6 +118,83 @@ export const createController = <
           data,
           total: data.length
         }
+
+      if (options.cache && !format) {
+        cache.set(cacheKey, response, options.ttl || 60)
+      }
+
+      res.json(response)
+
+    } catch (err) {
+      next(err)
+    }
+  }
+}
+
+interface LatestControllerOptions {
+  cache?: boolean
+  ttl?: number
+}
+
+export const createLatestController = <
+  TTable extends keyof Database['public']['Tables']
+>(
+  table: TTable,
+  latestFn: (table: TTable) => Promise<any>,
+  options: LatestControllerOptions = {}
+) => {
+  return async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const format = req.query.format
+
+      const cacheKey = `latest:${String(table)}`
+
+      // cache
+      if (options.cache && !format) {
+        const cached = cache.get(cacheKey)
+        if (cached) {
+          res.json(cached)
+          return
+        }
+      }
+
+      const { data, error } = await latestFn(table)
+
+      if (error) throw error
+
+      // export
+      if (format === 'csv') {
+        const csv = exportToCSV(data)
+
+        res.header('Content-Type', 'text/csv')
+        res.attachment(`${String(table)}_latest.csv`)
+
+        res.send(csv)
+        return
+      }
+
+      if (format === 'excel') {
+        const buffer = exportToExcel(data)
+
+        res.header(
+          'Content-Type',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+
+        res.attachment(`${String(table)}_latest.xlsx`)
+
+        res.send(buffer)
+        return
+      }
+
+      const response = {
+        data,
+        total: data?.length ?? 0
+      }
 
       if (options.cache && !format) {
         cache.set(cacheKey, response, options.ttl || 60)
