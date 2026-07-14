@@ -20,7 +20,6 @@ export const latestByPeriod = async (
 
   if (!latestData) return { data: [], error: null }
 
-  // ✅ FIX CLAVE
   const row = latestData as Record<string, any>
 
   let query = supabase.from(table).select('*')

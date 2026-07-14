@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import {
-  getAccesosBaf, getAccesosBafProvincias,
+  getAccesosBaf, getAccesosBafProvincias, getAccesosBafProvinciasLatest,
   getPenetracion, getPenetracionProvincias,
-  getTecnologias, getTecnologiasProvincias, getTecnologiasLocalidades,
+  getTecnologias, getTecnologiasProvincias, getTecnologiasProvinciasLatest, 
+  getTecnologiasLocalidades,
   getRangosVelocidad, getRangosVelocidadProvincias,
   getVelocidadMedia, getVelocidadMediaProvincias,
   getVelocidadProvincias, getVelocidadLocalidades,
-  getIngresos,
-  getTecnologiasProvinciasLatest
+  getIngresos
 } from '../controllers/internet.controller.js'
 
 export const internetRouter = Router()
@@ -81,6 +81,25 @@ internetRouter.get('/accesos/baf', getAccesosBaf)
  *         description: OK
  */
 internetRouter.get('/accesos/baf/provincias', getAccesosBafProvincias)
+
+/**
+ * @swagger
+ * /internet/accesos/baf/provincias:
+ *   get:
+ *     summary: Accesos de banda ancha fija por provincia
+ *     tags: [Internet]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+internetRouter.get('/accesos/baf/provincias/latest', getAccesosBafProvinciasLatest)
 
 /**
  * @swagger

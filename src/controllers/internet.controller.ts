@@ -17,6 +17,12 @@ export const getAccesosBafProvincias =
       ttl: 60
     }
   )
+export const getAccesosBafProvinciasLatest =
+  createLatestController(
+    'internet_accesos_baf_provincias',
+    latestByQuarter,
+    { cache: true, ttl: 60 }
+  )
 
 // Penetración
 export const getPenetracion = createController('internet_accesos_penetracion', withQuarter)
@@ -29,6 +35,12 @@ export const getPenetracionProvincias =
       cache: true,
       ttl: 60
     }
+  )
+export const getPenetracionProvinciasLatest =
+  createLatestController(
+    'internet_accesos_penetracion_provincias',
+    latestByQuarter,
+    { cache: true, ttl: 60 }
   )
 
 // Tecnologías
@@ -83,6 +95,12 @@ export const getRangosVelocidadProvincias =
       ttl: 60
     }
   )
+export const getRangosVelocidadProvinciasLatest =
+  createLatestController(
+    'internet_accesos_rangos_velocidad_provincias',
+    latestByQuarter,
+    { cache: true, ttl: 60 }
+  )
 
 // Velocidad media de descarga
 export const getVelocidadMedia = createController('internet_velocidad_media_descarga', withQuarter)
@@ -96,6 +114,12 @@ export const getVelocidadMediaProvincias =
       ttl: 60
     }
   )
+export const getVelocidadMediaProvinciasLatest =
+  createLatestController(
+    'internet_velocidad_media_descarga_provincias',
+    latestByQuarter,
+    { cache: true, ttl: 60 }
+  )
 
 // Velocidad por provincia y localidad
 export const getVelocidadProvincias =
@@ -108,7 +132,12 @@ export const getVelocidadProvincias =
       ttl: 60
     }
   )
-
+export const getVelocidadProvinciasLatest =
+  createLatestController(
+    'internet_accesos_velocidad_provincias',
+    latestByQuarter,
+    { cache: true, ttl: 60 }
+  )
 
 export const getVelocidadLocalidades = async (
   req: Request<{}, {}, {}, { provincia?: string; localidad?: string }>,
