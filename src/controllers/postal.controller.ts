@@ -1,5 +1,6 @@
-import { createController } from './factories/controller.factory.js'
+import { createController, createLatestController } from './factories/controller.factory.js'
 import { withMonth, withQuarter, withProvince } from './adapters/query.adapters.js'
+import { latestByQuarter } from '../helpers/query.js'
 
 export const getAccesos =
   createController('telefonia_fija_accesos', withQuarter)
@@ -19,3 +20,10 @@ export const getFacturacionProduccionProvincias =
       ttl: 60
     }
   )
+
+  export const getFacturacionProduccionProvinciasLatest =
+    createLatestController(
+      'mercado_postal_facturacion_produccion_provincias',
+      latestByQuarter,
+      { cache: true, ttl: 60 }
+    )

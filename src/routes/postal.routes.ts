@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getFacturacion, getProduccion, getPersonalOcupado, getFacturacionProduccionProvincias } from '../controllers/postal.controller.js'
+import { getFacturacion, getProduccion, getPersonalOcupado, getFacturacionProduccionProvincias, getFacturacionProduccionProvinciasLatest } from '../controllers/postal.controller.js'
 
 export const mercadoPostalRouter = Router()
 
@@ -126,3 +126,23 @@ mercadoPostalRouter.get('/personal-ocupado', getPersonalOcupado)
  *         description: OK
  */
 mercadoPostalRouter.get('/facturacion-produccion/provincias', getFacturacionProduccionProvincias)
+
+
+/**
+ * @swagger
+ * /mercado-postal/facturacion-produccion/provincias/latest:
+ *   get:
+ *     summary: Facturación y producción postal por provincia (último período disponible)
+ *     tags: [Mercado Postal]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+mercadoPostalRouter.get('/facturacion-produccion/provincias/latest', getFacturacionProduccionProvinciasLatest)
