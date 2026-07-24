@@ -7,7 +7,10 @@ import {
   getRangosVelocidad, getRangosVelocidadProvincias,
   getVelocidadMedia, getVelocidadMediaProvincias,
   getVelocidadProvincias, getVelocidadLocalidades,
-  getIngresos
+  getIngresos,
+  getPenetracionProvinciasLatest,
+  getRangosVelocidadProvinciasLatest,
+  getVelocidadMediaProvinciasLatest
 } from '../controllers/internet.controller.js'
 
 export const internetRouter = Router()
@@ -84,9 +87,9 @@ internetRouter.get('/accesos/baf/provincias', getAccesosBafProvincias)
 
 /**
  * @swagger
- * /internet/accesos/baf/provincias:
+ * /internet/accesos/baf/provincias/latest:
  *   get:
- *     summary: Accesos de banda ancha fija por provincia
+ *     summary: Accesos de banda ancha fija por provincia (último período disponible)
  *     tags: [Internet]
  *     parameters:
  *       - in: query
@@ -170,6 +173,25 @@ internetRouter.get('/penetracion', getPenetracion)
  *         description: OK
  */
 internetRouter.get('/penetracion/provincias', getPenetracionProvincias)
+
+/**
+ * @swagger
+ * /internet/penetracion/provincias/latest:
+ *   get:
+ *     summary: Penetración de internet fijo por provincias (último período disponible)
+ *     tags: [Internet]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+internetRouter.get('/penetracion/provincias/latest', getPenetracionProvinciasLatest)
 
 /**
  * @swagger
@@ -363,6 +385,25 @@ internetRouter.get('/accesos/rangos-velocidad/provincias', getRangosVelocidadPro
 
 /**
  * @swagger
+ * /internet/accesos/rangos-velocidad/provincias/latest:
+ *   get:
+ *     summary: Accesos por rango de velocidad por provincia (último período disponible)
+ *     tags: [Internet]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+internetRouter.get('/accesos/rangos-velocidad/provincias/latest', getRangosVelocidadProvinciasLatest)
+
+/**
+ * @swagger
  * /internet/accesos/velocidad-media:
  *   get:
  *     summary: Velocidad media de descarga (Mbps, nacional)
@@ -430,6 +471,25 @@ internetRouter.get('/accesos/velocidad-media', getVelocidadMedia)
  *         description: OK
  */
 internetRouter.get('/accesos/velocidad-media/provincias', getVelocidadMediaProvincias)
+
+/**
+ * @swagger
+ * /internet/accesos/velocidad-media/provincias/latest:
+ *   get:
+ *     summary: Velocidad media de descarga en Mbps, por provincia (último período disponible)
+ *     tags: [Internet]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+internetRouter.get('/accesos/velocidad-media/provincias/latest', getVelocidadMediaProvinciasLatest)
 
 /**
  * @swagger
