@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAccesos, getAccesosProvincias, getIngresos, getPenetracion, getPenetracionProvincias } from '../controllers/fija.controller.js'
+import { getAccesos, getAccesosProvincias, getAccesosProvinciasLatest, getIngresos, getPenetracion, getPenetracionProvincias, getPenetracionProvinciasLatest } from '../controllers/fija.controller.js'
 
 export const telefoniaFijaRouter = Router()
 
@@ -66,6 +66,25 @@ telefoniaFijaRouter.get('/accesos', getAccesos)
  *         description: OK
  */
 telefoniaFijaRouter.get('/accesos/provincias', getAccesosProvincias)
+
+/**
+ * @swagger
+ * /telefonia-fija/accesos/provincias/latest:
+ *   get:
+ *     summary: Accesos de telefonía fija por provincia (último período disponible)
+ *     tags: [Telefonía Fija]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+telefoniaFijaRouter.get('/accesos/provincias/latest', getAccesosProvinciasLatest)
 
 /**
  * @swagger
@@ -163,3 +182,22 @@ telefoniaFijaRouter.get('/penetracion', getPenetracion)
  *         description: OK
  */
 telefoniaFijaRouter.get('/penetracion/provincias', getPenetracionProvincias)
+
+/**
+ * @swagger
+ * /telefonia-fija/penetracion/provincias/latest:
+ *   get:
+ *     summary: Penetración de telefonía fija por provincia (último período disponible)
+ *     tags: [Telefonía Fija]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+telefoniaFijaRouter.get('/penetracion/provincias/latest', getPenetracionProvinciasLatest)
