@@ -21,9 +21,9 @@ export const getFacturacionProduccionProvincias =
     }
   )
 
-  export const getFacturacionProduccionProvinciasLatest =
-    createLatestController(
-      'mercado_postal_facturacion_produccion_provincias',
-      latestByQuarter,
-      { cache: true, ttl: 60 }
-    )
+export const getFacturacionProduccionProvinciasLatest =
+  createLatestController(
+    'mercado_postal_facturacion_produccion_provincias',
+    latestByQuarter,
+    { cache: true, ttl: 60 }
+  )
