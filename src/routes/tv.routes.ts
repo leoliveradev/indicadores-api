@@ -1,5 +1,8 @@
 import { Router } from 'express'
-import { getAccesos, getAccesosProvincias, getIngresos, getPenetracion, getPenetracionProvincias } from '../controllers/tv.controller.js'
+import { getAccesos, getAccesosProvincias, getAccesosProvinciasLatest, 
+  getPenetracion, getPenetracionProvincias, getPenetracionProvinciasLatest, 
+  getIngresos
+} from '../controllers/tv.controller.js'
 
 export const televisionRouter = Router()
 
@@ -72,6 +75,25 @@ televisionRouter.get('/accesos', getAccesos)
  *         description: OK
  */
 televisionRouter.get('/accesos/provincias', getAccesosProvincias)
+
+/**
+ * @swagger
+ * /television/accesos/provincias/latest:
+ *   get:
+ *     summary: Accesos de TV por suscripción por provincia (último trimestre disponible)
+ *     tags: [TV]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+televisionRouter.get('/accesos/provincias/latest', getAccesosProvinciasLatest)
 
 /**
  * @swagger
@@ -169,3 +191,22 @@ televisionRouter.get('/penetracion', getPenetracion)
  *         description: OK
  */
 televisionRouter.get('/penetracion/provincias', getPenetracionProvincias)
+
+/**
+ * @swagger
+ * /television/penetracion/provincias/latest:
+ *   get:
+ *     summary: Penetración de TV (c/100 hab y c/100 hogares) (último trimestre disponible)
+ *     tags: [TV]
+ *     parameters:
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+televisionRouter.get('/penetracion/provincias/latest', getPenetracionProvinciasLatest)
