@@ -16,7 +16,8 @@ import { errorHandler, notFound } from './middlewares/errorHandler.js'
 
 
 const app = express()
-const PORT = process.env.PORT ?? 3000
+const PORT: number = parseInt(process.env.PORT || '10000', 10)
+const HOST: string = process.env.HOST || '0.0.0.0'
 
 app.use(cors())
 app.use(express.json())
@@ -56,8 +57,8 @@ app.use('/api/v1/mercado-postal', mercadoPostalRouter)
 app.use(notFound)
 app.use(errorHandler)
 
-app.listen(PORT, () => {
-  console.log(`🚀 ENACOM INDICADORES API running on http://localhost:${PORT}`)
-  console.log(`📄 Documentation on http://localhost:${PORT}/api-docs`)
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 ENACOM INDICADORES API running on http://${HOST}:${PORT}`)
+  console.log(`📄 Documentation on http://${HOST}:${PORT}/api-docs`)
 })
 
