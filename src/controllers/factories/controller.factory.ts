@@ -72,9 +72,6 @@ export const createController = <
 
       if (error) throw error
 
-      // if (format) {
-      //   paginationParams = {}
-      // }
 
       if (!usePagination && data.length > 5000) {
         res.status(400).json({
@@ -132,6 +129,7 @@ export const createController = <
 }
 
 interface LatestControllerOptions {
+  pagination?: boolean
   cache?: boolean
   ttl?: number
 }
@@ -144,18 +142,40 @@ export const createLatestController = <
   options: LatestControllerOptions = {}
 ) => {
   return async (
-    req: Request,
+    req: Request<
+      {},
+      {},
+      {},
+      {
+        page?: string
+        limit?: string
+        format?: string
+      }
+    >,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
     try {
       const format = req.query.format
 
-      const cacheKey = `latest:${String(table)}`
+      const hasPagination =
+        req.query.page !== undefined ||
+        req.query.limit !== undefined
 
-      // cache
+      const usePagination =
+        options.pagination &&
+        hasPagination &&
+        !format
+
+      const cacheKey = generateCacheKey(
+        `latest:${String(table)}`,
+        req.query
+      )
+
+      // Cache
       if (options.cache && !format) {
         const cached = cache.get(cacheKey)
+
         if (cached) {
           res.json(cached)
           return
@@ -166,7 +186,24 @@ export const createLatestController = <
 
       if (error) throw error
 
-      // export
+      const total = data?.length ?? 0
+
+      let page: number | undefined
+      let limit: number | undefined
+      let resultData = data
+
+      // Paginado en memoria
+      if (usePagination) {
+        page = Number(req.query.page || 1)
+        limit = Number(req.query.limit || 100)
+
+        const from = (page - 1) * limit
+        const to = from + limit
+
+        resultData = data.slice(from, to)
+      }
+
+      // Export CSV
       if (format === 'csv') {
         const csv = exportToCSV(data)
 
@@ -177,6 +214,7 @@ export const createLatestController = <
         return
       }
 
+      // Export Excel
       if (format === 'excel') {
         const buffer = exportToExcel(data)
 
@@ -191,10 +229,17 @@ export const createLatestController = <
         return
       }
 
-      const response = {
-        data,
-        total: data?.length ?? 0
-      }
+      const response = usePagination
+        ? {
+            data: resultData,
+            total,
+            page,
+            limit
+          }
+        : {
+            data: resultData,
+            total
+          }
 
       if (options.cache && !format) {
         cache.set(cacheKey, response, options.ttl || 60)
