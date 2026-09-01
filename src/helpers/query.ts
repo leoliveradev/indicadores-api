@@ -12,30 +12,70 @@ export const queryWithFilters = async (
 ) => {
   let query = supabase
     .from(table)
-    .select('*', options?.count ? { count: 'exact' } : undefined) as any
+    .select('*',
+      options?.count
+        ? { count: 'exact' }
+        : undefined
+    ) as any
 
-  const ignoredKeys = new Set(['from', 'to', 'page', 'limit', 'format', 'sort', 'order'])
+  const ignoredKeys = new Set([
+    'from',
+    'to',
+    'page',
+    'limit',
+    'format'
+  ])
+
+  const ilikeColumns = new Set([
+    'provincia',
+    'localidad',
+    'tecnologia'
+  ])
 
   for (const key in filters) {
     const value = filters[key]
-    if (!value) continue
 
-    if (ignoredKeys.has(key)) continue
-
-    if (key === 'provincia') {
-      query = query.ilike(key, `%${value}%`)
-    } else {
-      const parsed = isNaN(Number(value)) ? value : Number(value)
-      query = query.eq(key, parsed)
+    if (
+      value === undefined ||
+      value === null ||
+      value === ''
+    ) {
+      continue
     }
+
+    if (ignoredKeys.has(key)) {
+      continue
+    }
+
+    if (ilikeColumns.has(key)) {
+      query = query.ilike(
+        key,
+        `%${value}%`
+      )
+
+      continue
+    }
+
+    const parsedValue =
+      isNaN(Number(value))
+        ? value
+        : Number(value)
+
+    query = query.eq(key, parsedValue)
   }
 
   for (const col of orderBy) {
     query = query.order(col)
   }
 
-  if (typeof filters.from === 'number' && typeof filters.to === 'number') {
-    query = query.range(filters.from, filters.to)
+  if (
+    typeof filters.from === 'number' &&
+    typeof filters.to === 'number'
+  ) {
+    query = query.range(
+      filters.from,
+      filters.to
+    )
   }
 
   return query
@@ -61,3 +101,4 @@ export const latestByMonth = (table: TableName) =>
 
 export const latestByQuarter = (table: TableName) =>
   latestByPeriod(table, ['anio', 'trimestre'])
+
