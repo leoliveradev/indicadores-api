@@ -150,6 +150,7 @@ export const getVelocidadProvinciasLatest =
     'internet_accesos_velocidad_provincias',
     latestByQuarter,
     {
+      pagination: true,
       cache: true,
       ttl: 86400
     }
