@@ -22,3 +22,9 @@ import type { Tables } from './database.js'
 export type PartidoConProvincia = Tables<'partidos'> & {
   provincias: Tables<'provincias'> | null
 }
+
+export type LocalidadTecnologiaQueryParams = {
+  provincia?: string
+  localidad?: string
+  tecnologia?: string
+}
