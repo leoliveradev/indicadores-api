@@ -10,7 +10,8 @@ import {
   getIngresos,
   getPenetracionProvinciasLatest,
   getRangosVelocidadProvinciasLatest,
-  getVelocidadMediaProvinciasLatest
+  getVelocidadMediaProvinciasLatest,
+  getVelocidadProvinciasLatest
 } from '../controllers/internet.controller.js'
 
 export const internetRouter = Router()
@@ -548,19 +549,46 @@ internetRouter.get('/accesos/velocidad/provincias', getVelocidadProvincias)
 
 /**
  * @swagger
+ * /internet/accesos/velocidad/provincias/latest:
+ *   get:
+ *     summary: Velocidades en Mbps a nivel provincial (último período disponible)
+ *     tags: [Internet]
+ *     parameters:
+ *       - in: query
+ *         name: provincia
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
+ *       - in: query
+ *         name: format
+ *         schema:
+ *           type: string
+ *           enum: [csv, excel]
+ *         description: Formato de exportación de datos
+ *     responses:
+ *       200:
+ *         description: OK
+ */
+internetRouter.get('/accesos/velocidad/provincias/latest', getVelocidadProvinciasLatest)
+
+/**
+ * @swagger
  * /internet/accesos/velocidad/localidades:
  *   get:
  *     summary: Velocidades en Mbps a nivel localidad
  *     tags: [Internet]
  *     parameters:
- *       - in: query
- *         name: anio
- *         schema:
- *           type: integer
- *       - in: query
- *         name: trimestre
- *         schema:
- *           type: integer
  *       - in: query
  *         name: provincia
  *         schema:
