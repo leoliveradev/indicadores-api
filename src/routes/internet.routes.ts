@@ -2,7 +2,7 @@ import { Router } from 'express'
 import {
   getAccesosBaf, getAccesosBafProvincias, getAccesosBafProvinciasLatest,
   getPenetracion, getPenetracionProvincias,
-  getTecnologias, getTecnologiasProvincias, getTecnologiasProvinciasLatest, 
+  getTecnologias, getTecnologiasProvincias, getTecnologiasProvinciasLatest,
   getTecnologiasLocalidades,
   getRangosVelocidad, getRangosVelocidadProvincias,
   getVelocidadMedia, getVelocidadMediaProvincias,
@@ -302,6 +302,18 @@ internetRouter.get('/accesos/tecnologias/provincias/latest', getTecnologiasProvi
  *         schema:
  *           type: string
  *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
+ *       - in: query
  *         name: format
  *         schema:
  *           type: string
@@ -550,9 +562,25 @@ internetRouter.get('/accesos/velocidad/provincias', getVelocidadProvincias)
  *         schema:
  *           type: integer
  *       - in: query
+ *         name: provincia
+ *         schema:
+ *           type: string
+ *       - in: query
  *         name: localidad
  *         schema:
  *           type: string
+  *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Número de página (opcional)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 100
+ *         description: Cantidad de registros por página (opcional)
  *       - in: query
  *         name: format
  *         schema:
