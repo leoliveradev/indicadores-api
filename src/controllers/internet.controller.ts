@@ -1,7 +1,5 @@
-import type { Request, Response, NextFunction } from 'express'
-
 import { createController, createLatestController } from './factories/controller.factory.js'
-import { withQuarter, withProvince } from './adapters/query.adapters.js'
+import { withQuarter, withProvince, withVelocidadLocalidad, withTecnologiaLocalidad } from './adapters/query.adapters.js'
 import { latestByQuarter } from '../helpers/query.js'
 
 
@@ -14,14 +12,17 @@ export const getAccesosBafProvincias =
     {
       pagination: true,
       cache: true,
-      ttl: 60
+      ttl: 86400
     }
   )
 export const getAccesosBafProvinciasLatest =
   createLatestController(
     'internet_accesos_baf_provincias',
     latestByQuarter,
-    { cache: true, ttl: 60 }
+    {
+      cache: true,
+      ttl: 86400
+    }
   )
 
 // Penetración
@@ -33,18 +34,25 @@ export const getPenetracionProvincias =
     {
       pagination: true,
       cache: true,
-      ttl: 60
+      ttl: 86400
     }
   )
 export const getPenetracionProvinciasLatest =
   createLatestController(
     'internet_accesos_penetracion_provincias',
     latestByQuarter,
-    { cache: true, ttl: 60 }
+    {
+      cache: true,
+      ttl: 86400
+    }
   )
 
 // Tecnologías
-export const getTecnologias = createController('internet_accesos_tecnologias', withQuarter)
+export const getTecnologias =
+  createController(
+    'internet_accesos_tecnologias',
+    withQuarter
+  )
 
 export const getTecnologiasProvincias =
   createController(
@@ -53,35 +61,30 @@ export const getTecnologiasProvincias =
     {
       pagination: true,
       cache: true,
-      ttl: 60
+      ttl: 86400
     }
   )
 export const getTecnologiasProvinciasLatest =
   createLatestController(
     'internet_accesos_tecnologias_provincias',
     latestByQuarter,
-    { cache: true, ttl: 60 }
+    {
+      cache: true,
+      ttl: 86400
+    }
   )
 
 // Tecnologías por localidad — filtro por provincia/localidad
-export const getTecnologiasLocalidades = async (
-  req: Request<{}, {}, {}, { provincia?: string; localidad?: string; tecnologia?: string }>,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  try {
-    const { provincia, localidad, tecnologia } = req.query
-    let query = (await import('../config/supabase.js')).supabase
-      .from('internet_accesos_tecnologias_localidades')
-      .select('*') as any
-    if (provincia) query = query.ilike('provincia', `%${provincia}%`)
-    if (localidad) query = query.ilike('localidad', `%${localidad}%`)
-    if (tecnologia) query = query.ilike('tecnologia', `%${tecnologia}%`)
-    const { data, error } = await query.order('provincia').order('localidad')
-    if (error) throw error
-    res.json({ data, total: data.length })
-  } catch (err) { next(err) }
-}
+export const getTecnologiasLocalidades =
+  createController(
+    'internet_accesos_tecnologias_localidades',
+    withTecnologiaLocalidad,
+    {
+      pagination: true,
+      cache: true,
+      ttl: 300
+    }
+  )
 
 // Rangos de velocidad
 export const getRangosVelocidad = createController('internet_accesos_rangos_velocidad', withQuarter)
@@ -92,18 +95,25 @@ export const getRangosVelocidadProvincias =
     {
       pagination: true,
       cache: true,
-      ttl: 60
+      ttl: 86400
     }
   )
 export const getRangosVelocidadProvinciasLatest =
   createLatestController(
     'internet_accesos_rangos_velocidad_provincias',
     latestByQuarter,
-    { cache: true, ttl: 60 }
+    {
+      cache: true,
+      ttl: 86400
+    }
   )
 
 // Velocidad media de descarga
-export const getVelocidadMedia = createController('internet_velocidad_media_descarga', withQuarter)
+export const getVelocidadMedia =
+  createController(
+    'internet_velocidad_media_descarga',
+    withQuarter
+  )
 export const getVelocidadMediaProvincias =
   createController(
     'internet_velocidad_media_descarga_provincias',
@@ -111,14 +121,17 @@ export const getVelocidadMediaProvincias =
     {
       pagination: true,
       cache: true,
-      ttl: 60
+      ttl: 86400
     }
   )
 export const getVelocidadMediaProvinciasLatest =
   createLatestController(
     'internet_velocidad_media_descarga_provincias',
     latestByQuarter,
-    { cache: true, ttl: 60 }
+    {
+      cache: true,
+      ttl: 86400
+    }
   )
 
 // Velocidad por provincia y localidad
@@ -129,33 +142,28 @@ export const getVelocidadProvincias =
     {
       pagination: true,
       cache: true,
-      ttl: 60
+      ttl: 86400
     }
   )
 export const getVelocidadProvinciasLatest =
   createLatestController(
     'internet_accesos_velocidad_provincias',
     latestByQuarter,
-    { cache: true, ttl: 60 }
+    {
+      cache: true,
+      ttl: 86400
+    }
   )
 
-export const getVelocidadLocalidades = async (
-  req: Request<{}, {}, {}, { provincia?: string; localidad?: string }>,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  try {
-    const { provincia, localidad } = req.query
-    let query = (await import('../config/supabase.js')).supabase
-      .from('internet_accesos_velocidad_localidades')
-      .select('*') as any
-    if (provincia) query = query.ilike('provincia', `%${provincia}%`)
-    if (localidad) query = query.ilike('localidad', `%${localidad}%`)
-    const { data, error } = await query.order('provincia').order('localidad')
-    if (error) throw error
-    res.json({ data, total: data.length })
-  } catch (err) { next(err) }
-}
+export const getVelocidadLocalidades =
+  createController(
+    'internet_accesos_velocidad_localidades',
+    withVelocidadLocalidad,
+    {
+      pagination: true,
+      cache: true,
+      ttl: 86400
+    }
+  )
 
-// Ingresos
 export const getIngresos = createController('internet_ingresos', withQuarter)
